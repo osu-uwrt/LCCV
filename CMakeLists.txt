@@ -11,7 +11,7 @@ endif()
 
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set (CMAKE_CXX_STANDARD 17)
-add_compile_options(-Wall -Wextra -pedantic -Wno-unused-parameter -faligned-new -Werror -Wfatal-errors)
+add_compile_options(-Wall -Wextra -pedantic -Wno-unused-parameter -faligned-new)
 add_definitions(-D_FILE_OFFSET_BITS=64)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
@@ -46,12 +46,12 @@ include(CPack)
 find_package(PkgConfig REQUIRED)
 find_package(OpenCV REQUIRED)
 
-pkg_check_modules(LIBCAMERA REQUIRED libcamera)
-message(STATUS "libcamera library found:")
-message(STATUS "    version: ${LIBCAMERA_VERSION}")
-message(STATUS "    libraries: ${LIBCAMERA_LINK_LIBRARIES}")
-message(STATUS "    include path: ${LIBCAMERA_INCLUDE_DIRS}")
-include_directories(include ${LIBCAMERA_INCLUDE_DIRS} ${OPENCV_INCLUDE_DIRS})
+#pkg_check_modules(LIBCAMERA REQUIRED libcamera)
+#message(STATUS "libcamera library found:")
+#message(STATUS "    version: ${LIBCAMERA_VERSION}")
+#message(STATUS "    libraries: ${LIBCAMERA_LINK_LIBRARIES}")
+#message(STATUS "    include path: ${LIBCAMERA_INCLUDE_DIRS}")
+include_directories(include /usr/include/libcamera ${OPENCV_INCLUDE_DIRS})
 
 include(GNUInstallDirs)
 
@@ -69,7 +69,7 @@ set(HEADERS
 add_library(liblccv ${SOURCES} ${HEADERS})
 
 set_target_properties(liblccv PROPERTIES PREFIX "" IMPORT_PREFIX "")
-target_link_libraries(liblccv pthread ${LIBCAMERA_LINK_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(liblccv pthread /usr/lib/aarch64-linux-gnu/libcamera.so.0.1 ${OpenCV_LIBS})
 
 install(TARGETS liblccv 
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} 

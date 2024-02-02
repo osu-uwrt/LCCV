@@ -38,6 +38,9 @@ using CompletedRequestPtr = std::shared_ptr<CompletedRequest>;
 namespace controls = libcamera::controls;
 namespace properties = libcamera::properties;
 
+extern std::unique_ptr<libcamera::CameraManager> camera_manager_;
+extern bool cm_started;
+
 class LibcameraApp
 {
 public:
@@ -163,7 +166,6 @@ private:
 	void requestComplete(Request *request);
 	void configureDenoise(const std::string &denoise_mode);
 
-	std::unique_ptr<CameraManager> camera_manager_;
 	std::shared_ptr<Camera> camera_;
 	bool camera_acquired_ = false;
 	std::unique_ptr<CameraConfiguration> configuration_;
