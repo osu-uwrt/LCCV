@@ -69,7 +69,9 @@ set(HEADERS
 add_library(liblccv ${SOURCES} ${HEADERS})
 
 set_target_properties(liblccv PROPERTIES PREFIX "" IMPORT_PREFIX "")
-target_link_libraries(liblccv pthread /usr/lib/aarch64-linux-gnu/libcamera.so.0.1 ${OpenCV_LIBS})
+C:
+C
+target_link_libraries(liblccv pthread /usr/lib/aarch64-linux-gnu/libcamera.so.0.2 ${OpenCV_LIBS})
 
 install(TARGETS liblccv 
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} 
